@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk update && apk add --no-cache apache2 -y
+RUN apk update && apk add apache2 -y
 
 ADD index.html /var/www/html/
 
