@@ -6,7 +6,7 @@ public class App {
     }
 
     public static String greet(String name) {
-        return "Hello, "+ Java "!";
+        return "Hello, " + name + "!";
     }
 }
 
