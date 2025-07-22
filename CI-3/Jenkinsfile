@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+    environment {
+        IMAGE_NAME = "ci-java-demo"
+        IMAGE_TAG = "v${BUILD_NUMBER}"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/your-org/your-java-repo.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        stage('Unit Test & Coverage') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Static Code Analysis') {
+            steps {
+                sh 'mvn checkstyle:checkstyle pmd:check dependency-check:check'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh '''
+                        echo "$PASS" | docker login -u "$USER" --password-stdin
+                        docker push $IMAGE_NAME:$IMAGE_TAG
+                    '''
+                }
+            }
+        }
+    }
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+            jacoco execPattern: '**/target/jacoco.exec'
+            recordIssues tools: [checkStyle(), pmdParser(), dependencyCheck()]
+        }
+    }
+}
