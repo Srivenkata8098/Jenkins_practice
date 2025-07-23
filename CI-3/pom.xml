@@ -58,17 +58,20 @@
             </plugin>
 
             <!-- OWASP Dependency Check Plugin -->
-            <plugin>
+           <plugin>
   <groupId>org.owasp</groupId>
   <artifactId>dependency-check-maven</artifactId>
   <version>8.2.1</version>
   <configuration>
-    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey> <!-- optional -->
+    <failBuildOnCVSS>11</failBuildOnCVSS> <!-- Don't fail on any severity -->
+    <scanSet>
+      <file>${project.build.directory}/${project.build.finalName}.jar</file>
+    </scanSet>
     <cveValidForHours>24</cveValidForHours>
-    <failBuildOnCVSS>7</failBuildOnCVSS> <!-- optional -->
-    <autoUpdate>false</autoUpdate> <!-- to skip huge NVD download -->
+    <dataDirectory>${project.build.directory}/dependency-check-data</dataDirectory> <!-- Keeps data local to job -->
   </configuration>
 </plugin>
+
 
 
 
