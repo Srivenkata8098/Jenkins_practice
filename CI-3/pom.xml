@@ -63,14 +63,13 @@
   <artifactId>dependency-check-maven</artifactId>
   <version>8.2.1</version>
   <configuration>
-    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey> <!-- Optional -->
+    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey> <!-- optional -->
     <cveValidForHours>24</cveValidForHours>
-    <scanSet>
-      <directory>${project.basedir}</directory>
-    </scanSet>
-    <failBuildOnCVSS>7</failBuildOnCVSS> <!-- optional: fail only if high severity -->
+    <failBuildOnCVSS>7</failBuildOnCVSS> <!-- optional -->
+    <autoUpdate>false</autoUpdate> <!-- to skip huge NVD download -->
   </configuration>
 </plugin>
+
 
 
         </plugins>
