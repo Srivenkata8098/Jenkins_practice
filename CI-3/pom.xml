@@ -63,12 +63,17 @@
   <artifactId>dependency-check-maven</artifactId>
   <version>8.2.1</version>
   <configuration>
-    <failBuildOnCVSS>11</failBuildOnCVSS> <!-- Don't fail on any severity -->
+    <failBuildOnCVSS>11</failBuildOnCVSS> <!-- Never fail the build -->
     <scanSet>
-      <file>${project.build.directory}/${project.build.finalName}.jar</file>
+      <scan>
+        <directory>${project.build.directory}</directory>
+        <includes>
+          <include>${project.build.finalName}.jar</include>
+        </includes>
+      </scan>
     </scanSet>
     <cveValidForHours>24</cveValidForHours>
-    <dataDirectory>${project.build.directory}/dependency-check-data</dataDirectory> <!-- Keeps data local to job -->
+    <dataDirectory>${project.build.directory}/dependency-check-data</dataDirectory>
   </configuration>
 </plugin>
 
