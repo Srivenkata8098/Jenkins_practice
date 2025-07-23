@@ -62,6 +62,13 @@
                     </execution>
                 </executions>
             </plugin>
+            <properties>
+    <sonar.projectKey>Srivenkata8098_Jenkins_practice</sonar.projectKey>
+    <sonar.organization>Srivenkata8098</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+</properties>
+
             <plugin>
                 <groupId>io.snyk</groupId>
                 <artifactId>snyk-maven-plugin</artifactId>
