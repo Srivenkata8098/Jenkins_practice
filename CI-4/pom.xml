@@ -2,7 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
-         
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
     <artifactId>ci-cd-pipeline</artifactId>
@@ -18,7 +18,7 @@
         <sonar.login>${env.SONAR_TOKEN}</sonar.login>
     </properties>
 
-    <!-- ✅ Unit Testing Dependency -->
+    <!-- ✅ Project Dependencies -->
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -31,27 +31,28 @@
     <!-- ✅ Build Plugins -->
     <build>
         <plugins>
-            <!-- Compiler -->
+            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
             </plugin>
 
-            <!-- Unit Test Execution -->
+            <!-- Unit Test Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
             </plugin>
 
-            <!-- JaCoCo for Code Coverage -->
+            <!-- ✅ JaCoCo Plugin (Code Coverage) -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.8</version>
                 <executions>
                     <execution>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
@@ -66,22 +67,33 @@
                 </executions>
             </plugin>
 
-            <!-- PMD for Static Code Analysis -->
+            <!-- ✅ PMD Plugin (Code Quality Review) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.15.0</version>
                 <executions>
                     <execution>
+                        <id>pmd-analysis</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>pmd</goal>
                         </goals>
+                        <configuration>
+                            <failOnViolation>false</failOnViolation>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- Snyk for Security Vulnerability Scanning -->
+            <!-- ✅ Optional: SonarQube Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+
+            <!-- ✅ Optional: Snyk Plugin (For completeness, CLI is used in Jenkins) -->
             <plugin>
                 <groupId>io.snyk</groupId>
                 <artifactId>snyk-maven-plugin</artifactId>
