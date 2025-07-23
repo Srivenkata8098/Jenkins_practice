@@ -2,6 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
@@ -17,6 +18,7 @@
     </properties>
 
     <dependencies>
+        <!-- JUnit for testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -27,14 +29,15 @@
 
     <build>
         <plugins>
-            <!-- Surefire Plugin for running JUnit tests and generating XML reports -->
+
+            <!-- Surefire Plugin for running JUnit tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
             </plugin>
 
-            <!-- PMD Plugin for static code analysis -->
+            <!-- PMD Plugin for static analysis -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -53,6 +56,21 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- OWASP Dependency Check Plugin -->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>8.2.1</version>
+                <configuration>
+                    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey> <!-- optional -->
+                    <cveValidForHours>24</cveValidForHours>
+                    <scanSet>
+                        <scan>${project.basedir}/target</scan>
+                    </scanSet>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -66,17 +84,5 @@
             </plugin>
         </plugins>
     </reporting>
-  <plugin>
-  <groupId>org.owasp</groupId>
-  <artifactId>dependency-check-maven</artifactId>
-  <version>8.2.1</version>
-  <configuration>
-    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey> <!-- optional -->
-    <cveValidForHours>24</cveValidForHours>
-    <scanSet>
-      <scan>${project.basedir}/target</scan>
-    </scanSet>
-  </configuration>
-</plugin>
-</project>
 
+</project>
