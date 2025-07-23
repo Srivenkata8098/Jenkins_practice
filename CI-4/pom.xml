@@ -13,7 +13,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.projectKey>Srivenkata8098_Jenkins_practice</sonar.projectKey>
-        <sonar.organization>Srivenkata8098</sonar.organization>
+        <sonar.organization>srivenkata8098</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.login>${env.SONAR_TOKEN}</sonar.login>
     </properties>
