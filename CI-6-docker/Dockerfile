@@ -23,8 +23,8 @@ RUN pip install --no-cache -r requirements.txt
 
 RUN curl -sSLo /tmp/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip \
     && unzip /tmp/sonar-scanner.zip -d /opt \
-    && rm /tmp/sonar-scanner.zip \
     && mv /opt/sonar-scanner-* /opt/sonar-scanner \
+    && ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner \
     && rm -rf /tmp/sonar-scanner.zip
 
 
