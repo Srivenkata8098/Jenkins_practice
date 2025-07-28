@@ -1,4 +1,4 @@
 FROM tomcat:9.0
-ADD /workspace/target/*.war /usr/local/tomcat/webapps/
+ADD demo-1.0.0.war.war /usr/local/tomcat/webapps/
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
