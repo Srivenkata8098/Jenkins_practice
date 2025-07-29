@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+myenv/
+pylint.txt
+test-reports/
+coverage.xml
