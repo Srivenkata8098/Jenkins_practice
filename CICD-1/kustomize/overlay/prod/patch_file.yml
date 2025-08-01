@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-java
+  namespace: cicd-space
+  labels:
+    app: cicd
+spec:
+  replicas: 1
