@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-java
+  labels:
+    app: cicd
+  namespace: cicd-space
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: java=docker8098/CICD-1_java
+    argocd-image-updater.argoproj.io/java.pull-secret: dockerhub-cred
+    argocd-image-updater.argoproj.io/java.update-strategy: semver
+    argocd-image-updater.argoproj.io/java.allow-tags: regexp:^v[0-9]+\.[0.9]+\.[0-9]+$
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
+    argocd-image-updater.argoproj.io/write-back-repo: 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicd
+  template:
+    metadata:
+      labels:
+        app: cicd
+    spec:
+      containers:
+        - name: java #should match with annotations.
+          image: dockerhubuser/CICD-1_java:
+          ports:
+            - containerPort: 3000
