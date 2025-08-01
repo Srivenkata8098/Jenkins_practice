@@ -12,7 +12,7 @@
 
   <properties>
     <java.version>17</java.version>
-    <spring-boot.version>3.1.5</spring-boot.version>
+    <spring-boot.version>3.3.7</spring-boot.version>
   </properties>
 
   <!-- Import Spring Boot BOM -->
@@ -29,30 +29,55 @@
   </dependencyManagement>
 
   <dependencies>
-    <!-- Web application -->
+    <!-- Spring Boot Web Starter -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- Embedded Tomcat excluded since WAR will be deployed to external Tomcat -->
+    <!-- Exclude embedded Tomcat, since WAR is for external deployment -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
       <scope>provided</scope>
     </dependency>
 
-    <!-- For unit testing -->
+    <!-- Testing dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <!-- Exclude vulnerable versions of logback -->
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- Secure version of SnakeYAML -->
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>2.2</version>
+    </dependency>
+
+    <!-- Secure version of logback (optional override, if needed in your app) -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.5.6</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <!-- Spring Boot plugin with version -->
+      <!-- Spring Boot Maven Plugin -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
