@@ -2,7 +2,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
@@ -14,7 +13,6 @@
   <properties>
     <java.version>17</java.version>
     <spring-boot.version>3.3.7</spring-boot.version>
-    <tomcat.version>10.1.43</tomcat.version>
     <logback.version>1.3.15</logback.version>
   </properties>
 
@@ -27,13 +25,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
-      <!-- Override vulnerable Tomcat version if needed -->
-      <dependency>
-        <groupId>org.apache.tomcat.embed</groupId>
-        <artifactId>tomcat-embed-core</artifactId>
-        <version>${tomcat.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -44,20 +35,19 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- WAR Deploy (external Tomcat) -->
+    <!-- WAR packaging support -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
       <scope>provided</scope>
     </dependency>
 
-    <!-- Override Logback to patched version -->
+    <!-- Logback explicitly downgraded to safe/test-compatible version -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
     </dependency>
-
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
