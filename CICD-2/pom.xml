@@ -2,6 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
@@ -13,9 +14,8 @@
   <properties>
     <java.version>17</java.version>
     <spring-boot.version>3.3.7</spring-boot.version>
-    <logback.version>1.3.15</logback.version>
     <tomcat.version>10.1.43</tomcat.version>
-    <spring.version>6.1.21</spring.version>
+    <logback.version>1.3.15</logback.version>
   </properties>
 
   <dependencyManagement>
@@ -28,23 +28,11 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- Override vulnerable Tomcat -->
+      <!-- Override vulnerable Tomcat version if needed -->
       <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-core</artifactId>
         <version>${tomcat.version}</version>
-      </dependency>
-
-      <!-- Override vulnerable Spring (optional but safe) -->
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-        <version>${spring.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -56,40 +44,31 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- External WAR deployment -->
+    <!-- WAR Deploy (external Tomcat) -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
       <scope>provided</scope>
     </dependency>
 
-    <!-- Secure Logback override -->
+    <!-- Override Logback to patched version -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
     </dependency>
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
       <version>${logback.version}</version>
     </dependency>
 
-    <!-- Testing -->
+    <!-- Test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-core</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
   </dependencies>
 
@@ -103,4 +82,3 @@
     </plugins>
   </build>
 </project>
-
