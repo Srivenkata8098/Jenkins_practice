@@ -13,7 +13,6 @@
   <properties>
     <java.version>17</java.version>
     <spring-boot.version>3.3.7</spring-boot.version>
-    <logback.version>1.5.13</logback.version>
     <tomcat.version>10.1.43</tomcat.version>
     <spring.version>6.1.21</spring.version>
   </properties>
@@ -28,19 +27,19 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- Override vulnerable transitive versions -->
+      <!-- Optional: Override vulnerable Tomcat -->
       <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-core</artifactId>
         <version>${tomcat.version}</version>
       </dependency>
 
+      <!-- Optional: Override vulnerable Spring (use only if required) -->
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
         <version>${spring.version}</version>
       </dependency>
-
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-web</artifactId>
@@ -56,38 +55,21 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- External Tomcat WAR Deploy -->
+    <!-- WAR deploy -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
       <scope>provided</scope>
     </dependency>
 
-    <!-- Logback updated -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>${logback.version}</version>
-    </dependency>
+    <!-- Do NOT override logback manually -->
+    <!-- Let Spring Boot BOM manage compatible version -->
 
-    <!-- Explicitly override logback-core to patched version -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-core</artifactId>
-      <version>${logback.version}</version>
-    </dependency>
-
-    <!-- Unit testing -->
+    <!-- Testing -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
   </dependencies>
 
@@ -101,4 +83,3 @@
     </plugins>
   </build>
 </project>
-
