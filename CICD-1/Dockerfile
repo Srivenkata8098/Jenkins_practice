@@ -1,3 +1,3 @@
 FROM tomcat:9-jdk17
-COPY cicd-demo-1.0.0.war /usr/local/tomcat/webapps/
+COPY cicd-demo-1.0.0.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
