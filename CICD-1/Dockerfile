@@ -1,3 +1,4 @@
-FROM tomcat:9-jdk17
-COPY cicd-demo-1.0.0.war /usr/local/tomcat/webapps/ROOT.war
+FROM tomcat:9.0
+ADD demo-1.0.0.war /usr/local/tomcat/webapps/
 EXPOSE 8080
+CMD ["catalina.sh", "run"]
