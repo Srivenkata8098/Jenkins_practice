@@ -3,5 +3,5 @@ resources:
 patchesStrategicMerge:
   - patch_file.yml
 images:
-  - name: docker8098/CICD-1_java
+  - name: docker8098/cicd-1-java
     newTag: prod
