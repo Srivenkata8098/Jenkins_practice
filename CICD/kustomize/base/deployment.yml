@@ -25,6 +25,6 @@ spec:
     spec:
       containers:
         - name: java #should match with annotations.
-          image: dockerhubuser/CICD-1_java:7
+          image: docker8098/cicd-1-java:7
           ports:
             - containerPort: 3000
