@@ -3,5 +3,5 @@ resources:
   - deployment.yml
   - svc.yml
 images:
-  - name: docker8098/CICD-1_java
-    newTag:
+  - name: docker8098/cicd-1-java
+    newTag: "7"
