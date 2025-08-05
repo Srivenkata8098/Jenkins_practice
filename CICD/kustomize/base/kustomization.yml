@@ -4,4 +4,4 @@ resources:
   - svc.yml
 images:
   - name: docker8098/cicd-1-java
-    newTag: v24 
+    newTag: v14 
