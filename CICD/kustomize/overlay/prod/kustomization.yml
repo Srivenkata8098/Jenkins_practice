@@ -4,4 +4,4 @@ patchesStrategicMerge:
   - patch_file.yml
 images:
   - name: docker8098/cicd-1-java
-    newTag: "7"
+    newTag: v24 
