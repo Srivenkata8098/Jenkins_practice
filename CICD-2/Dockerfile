@@ -1,8 +1,12 @@
-FROM tomcat:9.0
+FROM python:3.11-slim
 
-ADD cicd-demo-1.0.0.war /usr/local/tomcat/webapps/
+COPY requirements.txt .
 
-EXPOSE 8080
+RUN pip install -r requirements.txt
 
-CMD ["catalina.sh", "run"]
+COPY app/ .
+
+EXPOSE 5000
+
+CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:5000", "app:app"]
 
