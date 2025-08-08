@@ -1,5 +1,5 @@
 flask==2.2.5
-werkzeug>=2.2.0
+werkzeug<3.0
 pytest==7.4.0
 pylint==2.17.5
 coverage==7.4.1
