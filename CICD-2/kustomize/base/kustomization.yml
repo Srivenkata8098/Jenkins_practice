@@ -4,4 +4,4 @@ resources:
   - namespace.yml
 images:
   - name: docker8098/cicd-1-python
-    newTag: v58
+    newTag: v60
