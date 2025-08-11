@@ -1,1 +1,7 @@
-newTag: REPLACE_ME
+resources:
+  - ../../base
+patchesStrategicMerge:
+  - patch_file.yml
+images:
+  - name: docker8098/cicd-1-python
+    newTag: 
