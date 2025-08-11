@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-2-deployment
+  namespace: cicd-2
+  labels:
+    ci: cd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      ci: cd
+  template:
+    metadata:
+      labels:
+        ci: cd
+    spec:
+      containers:
+        - name: python
+          image: docker8098/cicd-1-python
+          ports:
+            - containerPort: 5000
+

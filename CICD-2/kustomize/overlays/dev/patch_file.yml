@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-2-deployment
+  namespace: cicd-2
+  labels:
+    ci: cd
+spec:
+  replicas: 1
+
